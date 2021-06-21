@@ -1,0 +1,7 @@
+﻿
+<ul class="nav navbar-nav">
+    @for (int i = 1; i <= 10; i++)
+    {
+        <li>@Html.ActionLink("Table " + i, "Table/" + i, "SimpleTest")</li>
+    }
+</ul>

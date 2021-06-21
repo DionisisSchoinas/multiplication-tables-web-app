@@ -6,8 +6,9 @@ using System.Web.Mvc;
 
 namespace multiplication_tables_web_app.Controllers
 {
-    public class HomeController : Controller
+    public class ResultsController : Controller
     {
+        // GET: Results
         public ActionResult Index()
         {
             return View();
