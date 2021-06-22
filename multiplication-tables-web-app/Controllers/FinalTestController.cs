@@ -11,31 +11,35 @@ namespace multiplication_tables_web_app.Controllers
         // GET: FinalTest/Questions
         public ActionResult Questions()
         {
-            /*
-            Create and return questions for all multiplication tables
-            */
-            return View();
+            List<Question> questions = new List<Question>();
+            for (int i = 1; i <= 10; i++)
+                for (int j = 1; j <= 10; j++)
+                questions.Add(new Question(i, j));
+            questions.Shuffle();
+            questions.RemoveRange(50, 50);
+
+            Test test = new Test();
+            test.questions = questions;
+            TempData["testQuestions"] = test;
+            return View(test);
         }
 
         // POST: FinalTest/Questions
         [HttpPost]
-        public ActionResult Questions(FormCollection collection)
+        public ActionResult Questions(Test testAnswers)
         {
-            /*
-            - Get questions and answers
-            - Check them
-            - Send to results page
-            */
-
             try
             {
-                // TODO: Add insert logic here
+                var test = TempData["testQuestions"] as Test;
+                for (int i = 0; i < testAnswers.questions.Count; i++)
+                    test.questions[i].answer = testAnswers.questions[i].answer;
 
-                return Redirect("/Results");
+                TempData["test"] = test;
+                return RedirectToAction("Index", "Results");
             }
             catch
             {
-                return View();
+                return Redirect("/");
             }
         }
     }

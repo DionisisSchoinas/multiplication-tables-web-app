@@ -14,39 +14,43 @@ namespace multiplication_tables_web_app.Controllers
             return View();
         }
 
-        // GET: SimpleTest/Table/5
+        // GET: SimpleTest/Table/:id
         // id : [1,10]
         public ActionResult Table(int id)
         {
-            /*
-            Create and return questions for the multiplication table of id
-            id = 1
-                1x1, 1x2, ...
-            id = 2
-                2x1, 2x2, ...
-            */
-            return View();
+            if (id < 1 || id > 10)
+            {
+                return Redirect("/SimpleTest/PickTest");
+            }
+
+            List<Question> questions = new List<Question>();
+            for (int i=1; i<=10; i++)
+                questions.Add(new Question(id, i));
+            questions.Shuffle();
+
+            Test test = new Test();
+            test.questions = questions;
+            TempData["testQuestions"] = test;
+            return View(test);
         }
 
         // POST: SimpleTest/Table
         [HttpPost]
-        public ActionResult Table(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Table(Test testAnswers)
         {
-            /*
-            - Get questions and answers
-            - Check them
-            - Send to results page
-            */
-
             try
             {
-                // TODO: Add update logic here
+                var test = TempData["testQuestions"] as Test;
+                for (int i = 0; i < testAnswers.questions.Count; i++)
+                    test.questions[i].answer = testAnswers.questions[i].answer;
 
-                return Redirect("/Results");
+                TempData["test"] = test;
+                return RedirectToAction("Index", "Results");
             }
             catch
             {
-                return View();
+                return Redirect("/");
             }
         }
     }

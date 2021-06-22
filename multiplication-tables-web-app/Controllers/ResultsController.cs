@@ -11,7 +11,15 @@ namespace multiplication_tables_web_app.Controllers
         // GET: Results
         public ActionResult Index()
         {
-            return View();
+            try
+            {
+                Test testAnswers = TempData["test"] as Test;
+                return View(testAnswers);
+            }
+            catch
+            {
+                return Redirect("/");
+            }
         }
     }
 }
