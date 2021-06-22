@@ -24,7 +24,15 @@
                     <li>@Html.ActionLink("Simple Test", "PickTest", "SimpleTest")</li>
                     <li>@Html.ActionLink("Final Test", "Questions", "FinalTest")</li>
                     <li>@Html.ActionLink("Teacher View", "Index", "Teacher")</li>
-                    <li>@Html.ActionLink("Login/Register", "Index", "Authorization")</li>
+                    @if (Session["is_teacher"] != null)
+                    {
+                        <li>@Html.ActionLink("Logout", "Logout", "Authorization")</li>
+                        <li>Logged in as : @Session["name"]</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Login/Register", "Index", "Authorization")</li>
+                    }
                 </ul>
             </div>
         </div>

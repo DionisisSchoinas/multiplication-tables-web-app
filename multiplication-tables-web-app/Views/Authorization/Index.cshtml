@@ -1,9 +1,36 @@
 ﻿
-<br />
+@model multiplication_tables_web_app.Models.User
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+
+    <table class="table">
+        <tr>
+            <td>
+                @Html.LabelFor(m => m.Username)
+            </td>
+            <td>
+                @Html.EditorFor(m => m.Username, new { required = true })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(m => m.Password)
+            </td>
+            <td>
+                @Html.PasswordFor(m => m.Password, new { required = true })
+            </td>
+        </tr>
+    </table>
+
+    if (ViewBag.error != null)
+    {
+        <div class="text-danger">
+            @ViewBag.error
+        </div>
+    }
+    <br />
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
