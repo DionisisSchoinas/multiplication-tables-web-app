@@ -12,5 +12,10 @@ namespace multiplication_tables_web_app.Controllers
         {
             return View();
         }
+
+        public ActionResult Theory()
+        {
+            return View();
+        }
     }
 }

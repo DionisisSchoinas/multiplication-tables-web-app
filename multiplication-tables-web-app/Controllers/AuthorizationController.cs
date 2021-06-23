@@ -44,12 +44,12 @@ namespace multiplication_tables_web_app.Controllers
                     return Redirect("/");
                 }
 
-                ViewBag.error = "Unknown error";
+                ViewBag.error = "Άγνωστο πρόβλημα";
                 return View();
             }
             else
             {
-                ViewBag.error = "Invalid credentials";
+                ViewBag.error = "Λανθασμένο όονμα χρήστη ή/και κωδικός πρόσβασης";
                 return View();
             }
         }
@@ -77,13 +77,13 @@ namespace multiplication_tables_web_app.Controllers
         {
             if (new_student.Password != Password_Confirmation)
             {
-                ViewBag.error = "Password and Password Confirmation must match";
+                ViewBag.error = "Κωδικός Χρήστη και Επιβεβαίωση Κωδικού Χρήστη πρέπει να είναι ίδια";
                 return View();
             }
 
             if (db.Users.Where(m => m.Username.Equals(new_student.Username)).Count() != 0)
             {
-                ViewBag.error = "User already exists";
+                ViewBag.error = "Υπάρχει ήδη ο χρήστης";
                 return View();
             }
 
@@ -112,13 +112,13 @@ namespace multiplication_tables_web_app.Controllers
         {
             if (new_teacher.Password != Password_Confirmation)
             {
-                ViewBag.error = "Password and Password Confirmation must match";
+                ViewBag.error = "Κωδικός Χρήστη και Επιβεβαίωση Κωδικού Χρήστη πρέπει να είναι ίδια";
                 return View();
             }
 
             if (db.Users.Where(m => m.Username.Equals(new_teacher.Username)).Count() != 0)
             {
-                ViewBag.error = "User already exists";
+                ViewBag.error = "Υπάρχει ήδη ο χρήστης";
                 return View();
             }
 
