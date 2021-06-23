@@ -13,7 +13,7 @@
                 @Html.LabelFor(m => m.Username)
             </td>
             <td>
-                @Html.EditorFor(m => m.Username, new { required = true })
+                @Html.TextBoxFor(m => m.Username, new { required = true })
             </td>
         </tr>
         <tr>
@@ -37,7 +37,7 @@
                 @Html.LabelFor(m => m.Name)
             </td>
             <td>
-                @Html.EditorFor(m => m.Name, new { required = true })
+                @Html.TextBoxFor(m => m.Name, new { required = true })
             </td>
         </tr>
     </table>
