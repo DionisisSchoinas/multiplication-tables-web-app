@@ -24,7 +24,7 @@
                     <li>@Html.ActionLink("Theory", "Theory", "Home")</li>
                     <li>@Html.ActionLink("Simple Test", "PickTest", "SimpleTest")</li>
                     <li>@Html.ActionLink("Final Test", "Questions", "FinalTest")</li>
-                    <li>@Html.ActionLink("Teacher View", "Index", "Teacher")</li>
+                    <li>@Html.ActionLink("Teacher View", "Students", "Teacher")</li>
                     @if (Session["is_teacher"] != null)
                     {
                         <li>@Html.ActionLink("Logout", "Logout", "Authorization")</li>

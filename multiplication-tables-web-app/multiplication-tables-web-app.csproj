@@ -229,7 +229,7 @@
     <Content Include="Views\Authorization\Index.cshtml" />
     <Content Include="Views\Authorization\Student.cshtml" />
     <Content Include="Views\Authorization\Teacher.cshtml" />
-    <Content Include="Views\Teacher\Index.cshtml" />
+    <Content Include="Views\Teacher\Students.cshtml" />
     <Content Include="Views\Teacher\StudentDetails.cshtml" />
     <Content Include="Views\Home\Theory.cshtml" />
   </ItemGroup>

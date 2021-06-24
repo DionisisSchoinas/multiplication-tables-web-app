@@ -8,10 +8,26 @@ namespace multiplication_tables_web_app.Models
 {
     public class StudentMetadata
     {
+        [Key]
+        [Display(Name = "Student Id")]
+        [Required]
+        public string StudentID;
+        
+        [Display(Name = "User Id")]
+        [Required]
+        public string UserID;
     }
 
     public class TeacherMetadata
     {
+        [Key]
+        [Display(Name = "Teacher Id")]
+        [Required]
+        public string TeacherID;
+
+        [Display(Name = "User Id")]
+        [Required]
+        public string UserID;
     }
 
     public class UserMetadata

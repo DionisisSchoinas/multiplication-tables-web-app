@@ -1,0 +1,25 @@
+﻿@model multiplication_tables_web_app.Models.Student
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <br />
+
+    @Html.DropDownListFor(m => m.StudentID, (SelectList)ViewData["students"], "Διάλεξε Μαθητή", htmlAttributes: new { @class = "form-control" /*, @required = true */})
+
+    if (ViewBag.error != null)
+    {
+        <div class="text-danger">
+            @ViewBag.error
+        </div>
+    }
+
+    <br />
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Εύρεση Πληροφοριών" class="btn btn-primary" />
+        </div>
+    </div>
+}
