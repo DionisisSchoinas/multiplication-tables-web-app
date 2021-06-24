@@ -27,6 +27,7 @@ namespace multiplication_tables_web_app.Controllers
             questions.RemoveRange(50, 50);
 
             Test test = new Test();
+            test.test_id = 10;  // 10 tables each has an id from 0 to 9, so finaltest gets 10
             test.questions = questions;
             TempData["testQuestions"] = test;
             return View(test);

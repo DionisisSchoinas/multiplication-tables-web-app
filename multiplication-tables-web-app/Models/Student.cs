@@ -15,17 +15,7 @@ namespace multiplication_tables_web_app.Models
     public partial class Student
     {
         public int StudentID { get; set; }
-        public string Grade_Table_1 { get; set; }
-        public string Grade_Table_2 { get; set; }
-        public string Grade_Table_3 { get; set; }
-        public string Grade_Table_4 { get; set; }
-        public string Grade_Table_5 { get; set; }
-        public string Grade_Table_6 { get; set; }
-        public string Grade_Table_7 { get; set; }
-        public string Grade_Table_8 { get; set; }
-        public string Grade_Table_9 { get; set; }
-        public string Grade_Table_10 { get; set; }
-        public string Grade_Final { get; set; }
+        public string Grades { get; set; }
         public int UserID { get; set; }
     
         public virtual User User { get; set; }

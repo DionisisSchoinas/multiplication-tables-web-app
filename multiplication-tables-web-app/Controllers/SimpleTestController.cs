@@ -35,6 +35,7 @@ namespace multiplication_tables_web_app.Controllers
             questions.Shuffle();
 
             Test test = new Test();
+            test.test_id = id-1;  // test_id for each table is table name minus 1
             test.questions = questions;
             TempData["testId"] = id.ToString();
             TempData["testQuestions"] = test;

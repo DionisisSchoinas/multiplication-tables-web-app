@@ -1,6 +1,14 @@
 ﻿
 @model Test
 
+@if (Session["is_teacher"] == null)
+{
+    <br />
+    <div>
+        Δεν είσαι συνδεδεμένος, συνδέσου για να αποθηκευτούν τα αποτελέσματά σου.
+    </div>
+    <br />
+}
 
 @using (Html.BeginForm())
 {

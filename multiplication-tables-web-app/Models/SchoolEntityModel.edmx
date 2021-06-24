@@ -10,17 +10,7 @@
             <PropertyRef Name="StudentID" />
           </Key>
           <Property Name="StudentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Grade_Table_1" Type="nvarchar" MaxLength="50" />
-          <Property Name="Grade_Table_2" Type="nvarchar" MaxLength="50" />
-          <Property Name="Grade_Table_3" Type="nvarchar" MaxLength="50" />
-          <Property Name="Grade_Table_4" Type="nvarchar" MaxLength="50" />
-          <Property Name="Grade_Table_5" Type="nvarchar" MaxLength="50" />
-          <Property Name="Grade_Table_6" Type="nvarchar" MaxLength="50" />
-          <Property Name="Grade_Table_7" Type="nvarchar" MaxLength="50" />
-          <Property Name="Grade_Table_8" Type="nvarchar" MaxLength="50" />
-          <Property Name="Grade_Table_9" Type="nvarchar" MaxLength="50" />
-          <Property Name="Grade_Table_10" Type="nvarchar" MaxLength="50" />
-          <Property Name="Grade_Final" Type="nvarchar" MaxLength="50" />
+          <Property Name="Grades" Type="nvarchar" MaxLength="500" />
           <Property Name="UserID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Teacher">
@@ -35,9 +25,9 @@
             <PropertyRef Name="UserID" />
           </Key>
           <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Username" Type="nvarchar" MaxLength="50" />
-          <Property Name="Password" Type="nvarchar" MaxLength="50" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="120" Nullable="false" />
         </EntityType>
         <Association Name="FK_dbo_Student_dbo_User_UserID">
           <End Role="User" Type="Self.User" Multiplicity="1">
@@ -89,17 +79,7 @@
             <PropertyRef Name="StudentID" />
           </Key>
           <Property Name="StudentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Grade_Table_1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Grade_Table_2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Grade_Table_3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Grade_Table_4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Grade_Table_5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Grade_Table_6" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Grade_Table_7" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Grade_Table_8" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Grade_Table_9" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Grade_Table_10" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Grade_Final" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Grades" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Self.FK_dbo_Student_dbo_User_UserID" FromRole="Student" ToRole="User" />
         </EntityType>
@@ -116,11 +96,11 @@
             <PropertyRef Name="UserID" />
           </Key>
           <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Students" Relationship="Self.FK_dbo_Student_dbo_User_UserID" FromRole="User" ToRole="Student" />
           <NavigationProperty Name="Teachers" Relationship="Self.FK_dbo_Teacher_dbo_Teacher_UserID" FromRole="User" ToRole="Teacher" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="120" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <Association Name="FK_dbo_Student_dbo_User_UserID">
           <End Role="User" Type="Self.User" Multiplicity="1">
@@ -172,18 +152,8 @@
           <EntitySetMapping Name="Students">
             <EntityTypeMapping TypeName="SchoolDBModel.Student">
               <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="Grades" ColumnName="Grades" />
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
-                <ScalarProperty Name="Grade_Table_1" ColumnName="Grade_Table_1" />
-                <ScalarProperty Name="Grade_Table_2" ColumnName="Grade_Table_2" />
-                <ScalarProperty Name="Grade_Table_3" ColumnName="Grade_Table_3" />
-                <ScalarProperty Name="Grade_Table_4" ColumnName="Grade_Table_4" />
-                <ScalarProperty Name="Grade_Table_5" ColumnName="Grade_Table_5" />
-                <ScalarProperty Name="Grade_Table_6" ColumnName="Grade_Table_6" />
-                <ScalarProperty Name="Grade_Table_7" ColumnName="Grade_Table_7" />
-                <ScalarProperty Name="Grade_Table_8" ColumnName="Grade_Table_8" />
-                <ScalarProperty Name="Grade_Table_9" ColumnName="Grade_Table_9" />
-                <ScalarProperty Name="Grade_Table_10" ColumnName="Grade_Table_10" />
-                <ScalarProperty Name="Grade_Final" ColumnName="Grade_Final" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
