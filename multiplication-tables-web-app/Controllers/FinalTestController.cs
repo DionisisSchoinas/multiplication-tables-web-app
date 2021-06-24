@@ -12,9 +12,17 @@ namespace multiplication_tables_web_app.Controllers
         public ActionResult Questions()
         {
             List<Question> questions = new List<Question>();
+            string question;
+            string answer;
             for (int i = 1; i <= 10; i++)
+            {
                 for (int j = 1; j <= 10; j++)
-                questions.Add(new Question(i, j));
+                {
+                    question = i + " x " + j + " = ";
+                    answer = (i * j).ToString();
+                    questions.Add(new Question(question, answer));
+                }
+            }
             questions.Shuffle();
             questions.RemoveRange(50, 50);
 
@@ -30,9 +38,15 @@ namespace multiplication_tables_web_app.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    ViewBag.error = "Γέμισε όλα τις απαντήσεις";
+                    return RedirectToAction("Questions");
+                }
+
                 var test = TempData["testQuestions"] as Test;
                 for (int i = 0; i < testAnswers.questions.Count; i++)
-                    test.questions[i].answer = testAnswers.questions[i].answer;
+                    test.questions[i].given_answer = testAnswers.questions[i].given_answer;
 
                 TempData["test"] = test;
                 return RedirectToAction("Index", "Results");

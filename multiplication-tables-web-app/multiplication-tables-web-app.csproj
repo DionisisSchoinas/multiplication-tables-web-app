@@ -164,9 +164,9 @@
       <DependentUpon>SchoolEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Singleton\Question.cs" />
-    <Compile Include="Singleton\ListEditor.cs" />
-    <Compile Include="Singleton\Test.cs" />
+    <Compile Include="Models\Singleton\Question.cs" />
+    <Compile Include="Models\Singleton\ListEditor.cs" />
+    <Compile Include="Models\Singleton\Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -232,6 +232,7 @@
     <Content Include="Views\Teacher\Students.cshtml" />
     <Content Include="Views\Teacher\StudentDetails.cshtml" />
     <Content Include="Views\Home\Theory.cshtml" />
+    <Content Include="Views\Shared\QuestionTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

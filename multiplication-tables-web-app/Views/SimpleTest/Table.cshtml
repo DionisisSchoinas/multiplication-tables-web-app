@@ -1,28 +1,2 @@
 ﻿
-@model Test
-
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <table class="table">
-        @for (int i = 0; i < Model.questions.Count; i++)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(m => m.questions[i].num1) x @Html.DisplayFor(m => m.questions[i].num2) =
-                </td>
-                <td>
-                    @Html.TextBoxFor(m => m.questions[i].answer)
-                </td>
-            </tr>
-        }
-    </table>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Submit Answers" class="btn btn-primary" />
-        </div>
-    </div>
-}
+@Html.Partial("../Shared/QuestionTable")

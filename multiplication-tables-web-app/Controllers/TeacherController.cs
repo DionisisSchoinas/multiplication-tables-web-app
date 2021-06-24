@@ -14,6 +14,9 @@ namespace multiplication_tables_web_app.Controllers
         // GET: Teacher/Students/
         public ActionResult Students()
         {
+            if (NotTeacher())
+                return RedirectToAction("Index", "Authorization");
+
             var new_students = db.Users.Join(db.Students, users => users.UserID, students => students.UserID, (users, students) => new { StudentID = students.StudentID, Name = users.Name });
             ViewBag.students = new SelectList(new_students, "StudentID", "Name");
             return View();
@@ -23,6 +26,9 @@ namespace multiplication_tables_web_app.Controllers
         [HttpPost]
         public ActionResult Students(int? StudentID)
         {
+            if (NotTeacher())
+                return RedirectToAction("Index", "Authorization");
+
             if (StudentID == null)
             {
                 ViewBag.error = "Διάλεξε μαθητή";
@@ -35,8 +41,19 @@ namespace multiplication_tables_web_app.Controllers
         // GET: Teacher/StudentDetails/1
         public ActionResult StudentDetails(int id)
         {
+            if (NotTeacher())
+                return RedirectToAction("Index", "Authorization");
+
             ViewBag.StudentID = id;
             return View();
+        }
+
+        private bool NotTeacher()
+        {
+            if (Session["is_teacher"] == null)
+                return true;
+
+            return false;
         }
     }
 }
