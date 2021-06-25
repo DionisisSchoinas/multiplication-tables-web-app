@@ -1,2 +1,33 @@
-﻿
-<h1>Student @ViewBag.StudentID Data</h1>
+﻿@model multiplication_tables_web_app.Models.Student
+@{
+    multiplication_tables_web_app.Models.Singleton.StudentData studentData = ViewBag.studentData;
+    List<multiplication_tables_web_app.Models.TestName> testNames = ViewBag.testNames;
+}
+
+<h1>Student Details</h1>
+
+<div>
+    @Html.DisplayNameFor(model => model.User.Name) : <b>@studentData.student.User.Name</b>
+</div>
+<br />
+
+@if (studentData.grades == null)
+{
+    <b>Δεν υπάρχουν στατιστικά, δεν έχουν γίνει τεστ</b>
+}
+else
+{
+    <table class="table">
+        @for (int i = 0; i < studentData.grades.Length / 2; i++) // length / 2 since we know grades are 2d array with Nx2 dimensions
+        {
+            <tr>
+                <td>
+                    <b>@testNames[i].Name</b>
+                </td>
+                <td>
+                    @studentData.grades[i, 0] λάθοι στις @studentData.grades[i, 1] ερωτήσεις
+                </td>
+            </tr>
+        }
+    </table>
+}

@@ -61,7 +61,7 @@ namespace multiplication_tables_web_app.Controllers
             if (current_grades == null)
             {
                 current_grades = "0__0";
-                for (int i=1; i<11; i++)
+                for (int i=1; i<db.TestNames.ToList().Count(); i++)
                 {
                     current_grades += "|_0__0";
                 }

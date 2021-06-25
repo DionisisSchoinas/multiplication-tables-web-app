@@ -20,6 +20,16 @@
           <Property Name="TeacherID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SchoolDB.dbo.TestName' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TestName">
+          <Key>
+            <PropertyRef Name="TestID" />
+            
+          </Key>
+          <Property Name="TestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="UserID" />
@@ -61,6 +71,12 @@
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TestName" EntityType="Self.TestName" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TestName].[TestID] AS [TestID], 
+    [TestName].[Name] AS [Name]
+    FROM [dbo].[TestName] AS [TestName]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_dbo_Student_dbo_User_UserID" Association="Self.FK_dbo_Student_dbo_User_UserID">
             <End Role="User" EntitySet="User" />
             <End Role="Student" EntitySet="Student" />
@@ -142,7 +158,15 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Teacher" EntitySet="Teachers" />
           </AssociationSet>
+          <EntitySet Name="TestNames" EntityType="SchoolDBModel.TestName" />
         </EntityContainer>
+        <EntityType Name="TestName">
+          <Key>
+            <PropertyRef Name="TestID" />
+          </Key>
+          <Property Name="TestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -173,6 +197,14 @@
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestNames">
+            <EntityTypeMapping TypeName="SchoolDBModel.TestName">
+              <MappingFragment StoreEntitySet="TestName">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TestID" ColumnName="TestID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

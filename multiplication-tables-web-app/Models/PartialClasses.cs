@@ -14,4 +14,7 @@ namespace multiplication_tables_web_app.Models
 
     [MetadataType(typeof(UserMetadata))]
     public partial class User { }
+
+    [MetadataType(typeof(TestNameMetadata))]
+    public partial class TestName { }
 }
