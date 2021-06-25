@@ -1,0 +1,27 @@
+﻿<div class="hint">
+
+    <button class="zoom bounce" id="hint_button" onclick="toggle()" width="100%"><img src="../Content/Images/magnifing_glass.png" width="50px"></button>
+    <div class="hint-content slider closed" id="slider">
+        <button onclick="toggle()" style="position:absolute;top:10px;right:5px">x</button>
+        <img src="../Content/Images/owl_image.png" style="right:0px;top:0px;position:absolute;margin-top:100px" height="100">
+        <img src="../Content/Images/speech_bubble.png" style="left:0px;top:0px;position:absolute" height="150">
+
+    </div>
+</div>
+<script>
+        var toggled = false;       
+        function toggle() {
+            if (toggled) {
+                document.getElementById("slider").classList.remove("closed");
+                document.getElementById("hint_button").style.visibility = 'hidden';
+                toggled = false;
+            }
+            else {
+                document.getElementById("slider").classList.add("closed");
+                setTimeout(function () { document.getElementById("hint_button").style.visibility = 'visible';}, 450);
+
+                toggled = true;
+
+            }
+        }
+</script>

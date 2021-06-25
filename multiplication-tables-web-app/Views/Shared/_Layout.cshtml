@@ -8,6 +8,115 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+    <style>
+
+        #container {
+            width: 1000px;
+            margin: 0 auto;
+            margin-top: 50px;
+        }
+
+        #img_container {
+            float: right;
+            width: 50%;
+            margin-top: 100px;
+            height: 500px;
+            background-image: url("../Content/Images/owl_image.png");
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        #speech_bubble {
+            float: left;
+            width: 50%;
+            height: 500px;
+            background-image: url("../Content/Images/speech_bubble.png");
+            background-repeat: no-repeat;
+            background-size: contain;
+            padding-top: 80px;
+            padding-left: 90px;
+            padding-right: 130px;
+            text-align: center;
+        }
+
+        #speech_bubble_text {
+            height: 130px;
+            overflow: auto;
+        }
+
+        .zoom {
+            background: none;
+            border: none;
+            transition: transform .2s; /* Animation */
+        }
+
+            .zoom:hover {
+                background: none;
+                transform: scale(1.5);
+            }
+
+        .slider {
+            overflow-y: hidden;
+            max-height: 200px; /* approximate max height */
+
+            transition-property: all;
+            transition-duration: .5s;
+            transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+        }
+
+            .slider.closed {
+                max-height: 0;
+            }
+
+        .hint {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+        }
+
+        .hint-content {
+            position: relative;
+            border-radius: 20px;
+            height: 200px;
+            width: 250px;
+        }
+
+        .disabled {
+            cursor: not-allowed;
+        }
+
+        #hint_button {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+        }
+
+        @@-webkit-keyframes bounce {
+            0% {
+                transform: scale(1,1) translate(0px, 0px);
+            }
+
+            30% {
+                transform: scale(1,0.8) translate(0px, 10px);
+            }
+
+            75% {
+                transform: scale(1,1.1) translate(0px, -25px);
+            }
+
+            100% {
+                transform: scale(1,1) translate(0px, 0px);
+            }
+        }
+
+        .bounce {
+            margin: 0 auto;
+            height: 20px;
+            width: 150px;
+            padding: 20px;
+            -webkit-animation: bounce 1s infinite;
+        }
+    </style>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -41,9 +150,7 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+
     </div>
 
     @Scripts.Render("~/bundles/jquery")

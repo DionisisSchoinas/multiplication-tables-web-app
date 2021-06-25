@@ -237,6 +237,9 @@
     <Content Include="Views\Teacher\Index.cshtml" />
     <Content Include="Views\Teacher\StudentDetails.cshtml" />
     <Content Include="Views\Home\Theory.cshtml" />
+    <Content Include="Views\Shared\Hint.cshtml" />
+    <Content Include="Views\Game\MultiplicationGame1.cshtml" />
+    <Content Include="Views\Game\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
