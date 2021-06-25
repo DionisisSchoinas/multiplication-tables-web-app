@@ -154,6 +154,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SchoolEntityModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Singleton\StudentData.cs" />
     <Compile Include="Models\Student.cs">
       <DependentUpon>SchoolEntityModel.tt</DependentUpon>
     </Compile>

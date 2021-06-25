@@ -1,25 +1,33 @@
 ﻿@model multiplication_tables_web_app.Models.Student
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <br />
-
-    @Html.DropDownListFor(m => m.StudentID, (SelectList)ViewData["students"], "Διάλεξε Μαθητή", htmlAttributes: new { @class = "form-control" /*, @required = true */})
-
-    if (ViewBag.error != null)
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.User.Name)
+        </th>
+        <th>
+            Χειρότερο score
+        </th>
+        <th>
+            Καλύτερο score
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var studentData in ViewBag.students)
     {
-        <div class="text-danger">
-            @ViewBag.error
-        </div>
+        <tr>
+            <td>
+                @studentData.student.User.Name
+            </td>
+            <td>
+                @studentData.worst_score
+            </td>
+            <td>
+                @studentData.best_score
+            </td>
+            <td>
+                @Html.ActionLink("Αναλυτικά", "StudentDetails", new { id = studentData.student.StudentID }, new { @class = "btn btn-info" })
+            </td>
+        </tr>
     }
-
-    <br />
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Εύρεση Πληροφοριών" class="btn btn-primary" />
-        </div>
-    </div>
-}
+</table>
