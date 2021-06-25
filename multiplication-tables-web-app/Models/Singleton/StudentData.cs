@@ -10,5 +10,6 @@ namespace multiplication_tables_web_app.Models.Singleton
         public Student student { get; set; }
         public string worst_score { get; set; }
         public string best_score { get; set; }
+        public int[,] grades { get; set; }
     }
 }

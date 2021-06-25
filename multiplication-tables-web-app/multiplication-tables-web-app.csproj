@@ -161,6 +161,9 @@
     <Compile Include="Models\Teacher.cs">
       <DependentUpon>SchoolEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TestName.cs">
+      <DependentUpon>SchoolEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>SchoolEntityModel.tt</DependentUpon>
     </Compile>

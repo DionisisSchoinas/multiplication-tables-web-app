@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -12,21 +13,6 @@ namespace multiplication_tables_web_app.Controllers
     {
         private SchoolDBEntities db = new SchoolDBEntities();
 
-        private string[] testToId = new string[]
-        {
-            "Προπαίδεια του 1",
-            "Προπαίδεια του 2",
-            "Προπαίδεια του 3",
-            "Προπαίδεια του 4",
-            "Προπαίδεια του 5",
-            "Προπαίδεια του 6",
-            "Προπαίδεια του 7",
-            "Προπαίδεια του 8",
-            "Προπαίδεια του 9",
-            "Προπαίδεια του 10",
-            "Τελικό τέστ προπαίδειας",
-        };
-
         // GET: Teacher/Students/
         public ActionResult Students()
         {
@@ -38,7 +24,7 @@ namespace multiplication_tables_web_app.Controllers
             var students = db.Students.ToList();
 
             var studentsData = new StudentData[students.Count()];
-            for (int i=0; i < studentsData.Count(); i++)
+            for (int i = 0; i < studentsData.Count(); i++)
             {
                 studentsData[i] = new StudentData();
                 studentsData[i].student = students[i];
@@ -67,7 +53,7 @@ namespace multiplication_tables_web_app.Controllers
                 int maxTest = -1;
                 float curScore;
                 string[] cur_grade;
-                for (int j=0; j<grades.Count(); j++)
+                for (int j = 0; j < grades.Count(); j++)
                 {
                     cur_grade = grades[j].Split(new string[] { "__" }, StringSplitOptions.None);
                     curScore = float.Parse(cur_grade[0]) / float.Parse(cur_grade[1]);
@@ -88,12 +74,12 @@ namespace multiplication_tables_web_app.Controllers
                 if (minTest == -1)
                     studentsData[i].best_score = "Δεν έχουν γίνει τεστ";
                 else
-                    studentsData[i].best_score = testToId[minTest] + " : " + (1-minScore) * 100 + "%";
+                    studentsData[i].best_score = db.TestNames.Find(minTest+1).Name + " : " + (1 - minScore) * 100 + "%";
 
                 if (maxTest == -1)
                     studentsData[i].worst_score = "Δεν έχουν γίνει τεστ";
                 else
-                    studentsData[i].worst_score = testToId[maxTest] + " : " + (1-maxScore) * 100 + "%";
+                    studentsData[i].worst_score = db.TestNames.Find(maxTest + 1).Name + " : " + (1 - maxScore) * 100 + "%";
             }
 
 
@@ -107,14 +93,47 @@ namespace multiplication_tables_web_app.Controllers
             if (NotTeacher())
                 return RedirectToAction("Index", "Authorization");
 
-            ViewBag.StudentID = id;
+            var student = db.Students.Find(id);
+            if (student == null)
+                return RedirectToAction("Students");
+
+            var studentData = new StudentData();
+            studentData.student = student;
+
+            /*
+                Format of grades:
+                mistakes1__total1|_mistakes2__total2|_mistakes3__mistakes3
+            */
+            string current_grades = student.Grades;
+
+            // Fiil grades if needed
+            if (current_grades == null)
+            {
+                studentData.grades = null;
+                ViewBag.studentData = studentData;
+                return View();
+            }
+
+            // Split grades per subject
+            string[] grades = current_grades.Split(new string[] { "|_" }, StringSplitOptions.None);
+
+            // Split mistakes and total
+            studentData.grades = new int[grades.Length,2];
+            string[] cur_grade;
+            for (int i = 0; i < grades.Count(); i++)
+            {
+                cur_grade = grades[i].Split(new string[] { "__" }, StringSplitOptions.None);
+                studentData.grades[i, 0] = int.Parse(cur_grade[0]);
+                studentData.grades[i, 1] = int.Parse(cur_grade[1]);
+            }
+
+            ViewBag.studentData = studentData;
+            ViewBag.testNames = db.TestNames.ToList();
             return View();
         }
 
         private bool NotTeacher()
         {
-            return false;
-
             if (Session["is_teacher"] == null)
                 return true;
 
