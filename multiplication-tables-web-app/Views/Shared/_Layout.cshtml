@@ -28,7 +28,6 @@
                     @if (Session["is_teacher"] != null)
                     {
                         <li>@Html.ActionLink("Logout", "Logout", "Authorization")</li>
-                        <li>Logged in as : @Session["name"]</li>
                     }
                     else
                     {
@@ -38,6 +37,12 @@
             </div>
         </div>
     </div>
+    @if (Session["is_teacher"] != null)
+    {
+        <div style="text-align:right;">
+            Συνδεδεμένος ως : @Session["name"]
+        </div>
+    }
     <div class="container body-content">
         @RenderBody()
         <hr />
