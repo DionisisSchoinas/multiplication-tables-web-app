@@ -1,4 +1,5 @@
 ﻿
+@Html.Partial("../Shared/StudentViews")
 <style>
     .imgbox {
         display: grid;
@@ -44,7 +45,7 @@
         <li>
             <a href="#Προπαίδεια">2. Προπαίδεια</a>
             <ul>
-                @for (int i=0; i<tests.Count(); i++)
+                @for (int i = 0; i < tests.Count(); i++)
                 {
                     <li><a href="#@tests[i].Name.Replace(" ", "_")">2.@(i+1). @tests[i].Name</a></li>
                 }
