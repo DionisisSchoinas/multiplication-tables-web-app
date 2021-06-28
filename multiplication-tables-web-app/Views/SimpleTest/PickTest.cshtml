@@ -1,9 +1,71 @@
 ﻿
+@{
+    List<multiplication_tables_web_app.Models.TestName> testNames = ViewBag.testNames;
+}
+
+<style>
+    .card {
+        border: black solid 1px;
+        border-radius: 5px;
+        width: 15vmax;
+        height: 15vmax;
+        float: left;
+        margin: 3rem;
+        padding: 1em;
+        background-color: white;
+        transition: transform .2s;
+        transition: background-color 0.2s ease;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        cursor: pointer;
+        /* Text alignment */
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .card:hover {
+        transform: scale(1.1);
+        background-color: lightgray;
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.4);
+    }
+
+    .card h1 {
+        hyphens: manual;
+        word-break: break-word;
+        word-wrap: break-word;
+        margin-top: 0px;
+        font-size: min(max(3.2vmax, 15px), 60px);
+    }
+</style>
+
 @Html.Partial("../Shared/StudentViews")
 
-<ul class="nav navbar-nav">
-    @for (int i = 1; i <= 10; i++)
+<div class="card-deck">
+    @for (int i = 0; i < testNames.Count(); i++)
     {
-        <li>@Html.ActionLink("Table " + i, "Table/" + i, "SimpleTest")</li>
+    <div class="card" onclick="location.href='/SimpleTest/Table/@(i+1)';">
+        <h1>
+            @{
+                string[] nameSplit = testNames[i].Name.Split(' ');
+                foreach (string word in nameSplit)
+                {
+                    // Add hyphen after every letter except the last one
+                    for (int j = 0; j < word.Length - 1; j++)
+                    {
+                        @Html.Raw(word[j]);
+                        // If the character is a number don't add a hyphen
+                        if (int.TryParse(word[j].ToString(), out _))
+                        {
+                            continue;
+                        }
+                        @Html.Raw("&shy;");
+                    }
+                    // Add the last character without a hyphen
+                    @Html.Raw(word[word.Length - 1] + " ");
+                }
+            }
+        </h1>
+    </div>
     }
-</ul>
+</div>
