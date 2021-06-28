@@ -4,28 +4,37 @@
 }
 
 <style>
-    a:hover {
-        text-decoration: none;
-    }
-
-
-    a:active {
-        text-decoration: none;
-    }
-
     .card {
         border: black solid 1px;
         border-radius: 5px;
-        width: 20rem;
-        max-width: 20rem;
-        height: 20rem;
-        max-height: 20rem;
+        width: 15vmax;
+        height: 15vmax;
+        float: left;
+        margin: 3rem;
+        padding: 1em;
+        background-color: white;
+        transition: transform .2s;
+        transition: background-color 0.2s ease;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        cursor: pointer;
+        /* Text alignment */
         text-align: center;
-        vertical-align: central;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
-    .card-text {
+    .card:hover {
+        transform: scale(1.1);
+        background-color: lightgray;
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.4);
+    }
+
+    .card h1 {
+        hyphens: manual;
+        word-break: break-word;
         word-wrap: break-word;
+        margin-top: 0px;
     }
 </style>
 
@@ -34,12 +43,28 @@
 <div class="card-deck">
     @for (int i = 0; i < testNames.Count(); i++)
     {
-        <div class="card">
-            <div class="card-block">
-                <a class="card-body stretched-link text-decoration-none" href="/SimpleTest/Table/@(i + 1)">
-                    <h1 class="card-title">@testNames[i].Name</h1>
-                </a>
-            </div>
-        </div>
+    <div class="card" onclick="location.href='/SimpleTest/Table/@(i+1)';">
+        <h1>
+            @{
+                string[] nameSplit = testNames[i].Name.Split(' ');
+                foreach (string word in nameSplit)
+                {
+                    // Add hyphen after every letter except the last one
+                    for (int j = 0; j < word.Length - 1; j++)
+                    {
+                        @Html.Raw(word[j]);
+                        // If the character is a number don't add a hyphen
+                        if (int.TryParse(word[j].ToString(), out _))
+                        {
+                            continue;
+                        }
+                        @Html.Raw("&shy;");
+                    }
+                    // Add the last character without a hyphen
+                    @Html.Raw(word[word.Length - 1] + " ");
+                }
+            }
+        </h1>
+    </div>
     }
 </div>
