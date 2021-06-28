@@ -1,9 +1,45 @@
 ﻿
+@{
+    List<multiplication_tables_web_app.Models.TestName> testNames = ViewBag.testNames;
+}
+
+<style>
+    a:hover {
+        text-decoration: none;
+    }
+
+
+    a:active {
+        text-decoration: none;
+    }
+
+    .card {
+        border: black solid 1px;
+        border-radius: 5px;
+        width: 20rem;
+        max-width: 20rem;
+        height: 20rem;
+        max-height: 20rem;
+        text-align: center;
+        vertical-align: central;
+    }
+
+    .card-text {
+        word-wrap: break-word;
+    }
+</style>
+
 @Html.Partial("../Shared/StudentViews")
 
-<ul class="nav navbar-nav">
-    @for (int i = 1; i <= 10; i++)
+<div class="card-deck">
+    @for (int i = 0; i < testNames.Count(); i++)
     {
-        <li>@Html.ActionLink("Table " + i, "Table/" + i, "SimpleTest")</li>
+        <div class="card">
+            <div class="card-block">
+                <a class="card-body stretched-link text-decoration-none" href="/SimpleTest/Table/@(i + 1)">
+                    <h1 class="card-title">@testNames[i].Name</h1>
+                </a>
+            </div>
+        </div>
     }
-</ul>
+</div>
