@@ -18,6 +18,9 @@ namespace multiplication_tables_web_app.Controllers
             try
             {
                 Test testAnswers = TempData["test"] as Test;
+                if (testAnswers == null)
+                    return Redirect("/");
+
                 var correct_results = new bool[testAnswers.questions.Count];
                 for (int i=0; i<testAnswers.questions.Count; i++)
                 {

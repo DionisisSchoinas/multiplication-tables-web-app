@@ -7,7 +7,7 @@
     var correct_results = ViewBag.correct_results;
 }
 
-<h1>Results</h1>
+<h1>Αποτέλέσματα</h1>
 
 @if (Model != null && Model.questions != null)
 {
@@ -26,10 +26,10 @@
 
         @for (int i = 0; i < Model.questions.Count; i++)
         {
-            string color = "rgba(255,0,0,0.5)"; //Red
+            string color = "rgba(255,0,0,0.4)"; //Red
             if (correct_results[i])
             {
-                color = "rgba(0,255,0,0.5)"; // Green
+                color = "rgba(0,255,0,0.4)"; // Green
             }
             <tr style="background-color: @color">
                 <td>
