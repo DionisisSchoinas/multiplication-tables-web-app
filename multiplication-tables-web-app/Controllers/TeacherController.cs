@@ -52,11 +52,9 @@ namespace multiplication_tables_web_app.Controllers
                 float maxScore = -1;
                 int maxTest = -1;
                 float curScore;
-                string[] cur_grade;
                 for (int j = 0; j < grades.Count(); j++)
                 {
-                    cur_grade = grades[j].Split(new string[] { "__" }, StringSplitOptions.None);
-                    curScore = float.Parse(cur_grade[0]) / float.Parse(cur_grade[1]);
+                    curScore = float.Parse(grades[j]);
                     if (curScore > maxScore)
                     {
                         maxScore = curScore;
@@ -74,29 +72,30 @@ namespace multiplication_tables_web_app.Controllers
                 if (minTest == -1)
                     studentsData[i].best_score = "Δεν έχουν γίνει τεστ";
                 else
-                    studentsData[i].best_score = db.TestNames.Find(minTest+1).Name + " : " + (1 - minScore) * 100 + "%";
+                    studentsData[i].best_score = db.TestNames.Find(minTest+1).Name + " : " + minScore + "%";
 
                 if (maxTest == -1)
                     studentsData[i].worst_score = "Δεν έχουν γίνει τεστ";
                 else
-                    studentsData[i].worst_score = db.TestNames.Find(maxTest + 1).Name + " : " + (1 - maxScore) * 100 + "%";
+                    studentsData[i].worst_score = db.TestNames.Find(maxTest + 1).Name + " : " + maxScore + "%";
             }
-
 
             ViewBag.students = studentsData;
             return View();
         }
 
         // GET: Teacher/StudentDetails/1
-        public ActionResult StudentDetails(int id)
+        public ActionResult StudentDetails(int? id)
         {
+            id = 1;
+            /*
             if (NotTeacher())
                 return RedirectToAction("Index", "Authorization");
-
+            */
             var student = db.Students.Find(id);
             if (student == null)
                 return RedirectToAction("Students");
-
+            
             var studentData = new StudentData();
             studentData.student = student;
 
@@ -118,13 +117,10 @@ namespace multiplication_tables_web_app.Controllers
             string[] grades = current_grades.Split(new string[] { "|_" }, StringSplitOptions.None);
 
             // Split mistakes and total
-            studentData.grades = new int[grades.Length,2];
-            string[] cur_grade;
+            studentData.grades = new float[grades.Length];
             for (int i = 0; i < grades.Count(); i++)
             {
-                cur_grade = grades[i].Split(new string[] { "__" }, StringSplitOptions.None);
-                studentData.grades[i, 0] = int.Parse(cur_grade[0]);
-                studentData.grades[i, 1] = int.Parse(cur_grade[1]);
+                studentData.grades[i] = float.Parse(grades[i]);
             }
 
             ViewBag.studentData = studentData;
