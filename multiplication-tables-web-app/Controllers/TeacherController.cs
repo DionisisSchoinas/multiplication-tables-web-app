@@ -137,6 +137,9 @@ namespace multiplication_tables_web_app.Controllers
             if (Session["is_teacher"] == null)
                 return true;
 
+            if (!(bool)Session["is_teacher"])
+                return true;
+
             return false;
         }
     }
