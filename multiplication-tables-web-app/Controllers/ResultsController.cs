@@ -22,12 +22,15 @@ namespace multiplication_tables_web_app.Controllers
                     return Redirect("/");
 
                 var correct_results = new bool[testAnswers.questions.Count];
+                var correct_results_total = 0;
                 for (int i=0; i<testAnswers.questions.Count; i++)
                 {
                     correct_results[i] = testAnswers.questions[i].given_answer.Trim().Equals(testAnswers.questions[i].answer.Trim());
+                    correct_results_total += correct_results[i] ? 1 : 0;
                 }
                 SaveMistakes(correct_results, testAnswers);
                 ViewBag.correct_results = correct_results;
+                ViewBag.correct_results_total = correct_results_total;
                 return View(testAnswers);
             }
             catch
