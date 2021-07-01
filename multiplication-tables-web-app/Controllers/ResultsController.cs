@@ -28,7 +28,7 @@ namespace multiplication_tables_web_app.Controllers
                     correct_results[i] = testAnswers.questions[i].given_answer.Trim().Equals(testAnswers.questions[i].answer.Trim());
                     correct_results_total += correct_results[i] ? 1 : 0;
                 }
-                SaveMistakes(correct_results, testAnswers);
+                SaveMistakes(correct_results, correct_results_total, testAnswers);
                 ViewBag.correct_results = correct_results;
                 ViewBag.correct_results_total = correct_results_total;
                 return View(testAnswers);
@@ -39,7 +39,7 @@ namespace multiplication_tables_web_app.Controllers
             }
         }
 
-        private void SaveMistakes(bool[] correct_answers, Test test)
+        private void SaveMistakes(bool[] correct_answers, int correct_answers_total, Test test)
         {
             // Not logged in, return
             if (Session["is_teacher"] == null)
@@ -51,14 +51,10 @@ namespace multiplication_tables_web_app.Controllers
 
             int id = (int)Session["student_id"];
             int total = correct_answers.Count();
-            int mistakes = 0;
-            // For each correct answer add 0 else add 1
-            foreach (bool m in correct_answers)
-                mistakes += (m) ? 0 : 1;
-            float perc = (1 - ((float)mistakes / (float)total)) * 100;
+            float perc = (float)correct_answers_total / (float)total * 100;
 
             /*
-                percentage = (1 - mistakes / total) * 100
+                percentage = correct / total * 100
 
                 Format of grades:
                 percentage1|_percentage2|_percentage3

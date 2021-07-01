@@ -8,11 +8,14 @@
     .card {
         border: black solid 1px;
         border-radius: 5px;
+        /* Used to balance width with the card-text */
+        font-size: min(max(2vmax, 20px), 100px);
+        width: 7em;
         min-width: 100px;
         min-height: 100px;
         float: left;
-        margin: 3rem;
-        padding: 1em;
+        margin: 1.5vmax;
+        padding: 1vmax 0.4vmax 1vmax 0.4vmax;
         /* Transitions */
         background-color: white;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -32,8 +35,11 @@
     .card-text {
         font-size: min(max(4vmax, 20px), 120px);
         font-weight: 900;
+        text-align: center;
     }
 </style>
+
+@Html.Partial("../Shared/CircularProgressBarCSS");
 
 <h1>Πληροφορίες Μαθητή</h1>
 <br />
@@ -93,7 +99,20 @@ else
                     }
                 }
                 <hr />
-                <p class="card-text" style="color: @color">@studentData.grades[i] %</p>
+                <div class="card-text" style="color: @color;">
+                    @{ 
+                        string c = "progress-circle ";
+                        c += studentData.grades[i] > 50 ? "over50 " : "";
+                        c += "p" + studentData.grades[i];
+                    }
+                    <div class="@c" style="font-size: min(max(2vmax, 20px), 100px); margin: auto;">
+                        <span style="color: @color;">@studentData.grades[i]%</span>
+                        <div class="left-half-clipper">
+                            <div class="first50-bar" style="background-color: @color;"></div>
+                            <div class="value-bar" style="border-color: @color;"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         }
     </div>
