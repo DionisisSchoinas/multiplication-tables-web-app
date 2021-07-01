@@ -249,6 +249,7 @@
     <Content Include="Views\Shared\QuestionTable.cshtml" />
     <Content Include="Views\Shared\StudentViews.cshtml" />
     <Content Include="Views\Shared\Hint.cshtml" />
+    <Content Include="Views\Shared\CircularProgressBarCSS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

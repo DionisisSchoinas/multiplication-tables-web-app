@@ -100,8 +100,10 @@ namespace multiplication_tables_web_app.Controllers
             studentData.student = student;
 
             /*
+                percentage = correct / total * 100
+
                 Format of grades:
-                mistakes1__total1|_mistakes2__total2|_mistakes3__mistakes3
+                percentage1|_percentage2|_percentage3
             */
             string current_grades = student.Grades;
 
