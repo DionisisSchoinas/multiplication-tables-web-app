@@ -29,6 +29,17 @@
                     <li>@Html.ActionLink("Κεντρική Σελίδα", "Index", "Home")</li>
                     <li>@Html.ActionLink("Θεωρία", "Theory", "Home")</li>
                     <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Παιχνίδια Εκμάθησης <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                @Html.ActionLink("Κάρτες (change link)", "PickTest", "SimpleTest", null, new { @class = "dropdown-item" })
+                            </li>
+                            <li>
+                                @Html.ActionLink("Σύννεφα (change link)", "Questions", "FinalTest", null, new { @class = "dropdown-item" })
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Κάνε Τεστ <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li>
@@ -39,7 +50,10 @@
                             </li>
                         </ul>
                     </li>
-                    <li>@Html.ActionLink("Δάσκαλος", "Students", "Teacher")</li>
+                    @if (Session["is_teacher"] != null)
+                    {
+                        <li>@Html.ActionLink("Δάσκαλος", "Students", "Teacher")</li>
+                    }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (Session["is_teacher"] != null)
