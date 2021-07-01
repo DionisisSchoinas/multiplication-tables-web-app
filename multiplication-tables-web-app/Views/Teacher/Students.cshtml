@@ -1,0 +1,33 @@
+﻿@model multiplication_tables_web_app.Models.Student
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.User.Name)
+        </th>
+        <th>
+            Χειρότερο score
+        </th>
+        <th>
+            Καλύτερο score
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var studentData in ViewBag.students)
+    {
+        <tr>
+            <td>
+                @studentData.student.User.Name
+            </td>
+            <td>
+                @studentData.worst_score
+            </td>
+            <td>
+                @studentData.best_score
+            </td>
+            <td>
+                @Html.ActionLink("Αναλυτικά", "StudentDetails", new { id = studentData.student.StudentID }, new { @class = "btn btn-info" })
+            </td>
+        </tr>
+    }
+</table>

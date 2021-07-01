@@ -28,5 +28,6 @@ namespace multiplication_tables_web_app.Models
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<TestName> TestNames { get; set; }
     }
 }

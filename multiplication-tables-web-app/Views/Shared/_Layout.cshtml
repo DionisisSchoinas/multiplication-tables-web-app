@@ -6,46 +6,66 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .login-display {
+            font-weight: 800;
+            margin: 5px;
+        }
+    </style>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("We Study", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Theory", "Theory", "Home")</li>
-                    <li>@Html.ActionLink("Simple Test", "PickTest", "SimpleTest")</li>
-                    <li>@Html.ActionLink("Final Test", "Questions", "FinalTest")</li>
-                    <li>@Html.ActionLink("Teacher View", "Index", "Teacher")</li>
+                    <li>@Html.ActionLink("Κεντρική Σελίδα", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Θεωρία", "Theory", "Home")</li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Κάνε Τεστ <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                @Html.ActionLink("Απλά Τεστ", "PickTest", "SimpleTest", null, new { @class = "dropdown-item" })
+                            </li>
+                            <li>
+                                @Html.ActionLink("Τελικό Τεστ", "Questions", "FinalTest", null, new { @class = "dropdown-item" })
+                            </li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Δάσκαλος", "Students", "Teacher")</li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
                     @if (Session["is_teacher"] != null)
                     {
-                        <li>@Html.ActionLink("Logout", "Logout", "Authorization")</li>
-                        <li>Logged in as : @Session["name"]</li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                                Συνδεδεμένος ως : <span class="login-display">@Session["name"] <span class="caret"></span></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Αποσύνδεση", "Logout", "Authorization")</li>
+                            </ul>
+                        </li>
                     }
                     else
                     {
-                        <li>@Html.ActionLink("Login/Register", "Index", "Authorization")</li>
+                        <li>@Html.ActionLink("Σύνδεση/Εγγραφή", "Index", "Authorization")</li>
                     }
                 </ul>
             </div>
         </div>
+    </nav>
+    <div id="body_container" class="container body-content">
+        <div style="overflow: auto; height: 80vh; margin: 45px 30px 30px 35px;">
+            @RenderBody()
+        </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
