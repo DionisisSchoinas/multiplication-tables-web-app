@@ -4,30 +4,92 @@
 
 @Html.Partial("../Shared/StudentViews")
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<style>
+    #container {
+        width: 1000px;
+        margin: 0 auto;
+        margin-top: 50px;
+    }
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    #img_container {
+        float: right;
+        width: 50%;
+        margin-top: 100px;
+        height: 500px;
+        background-image: url("../Content/Images/owl_image.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+
+    #speech_bubble {
+        float: left;
+        width: 50%;
+        height: 500px;
+        background-image: url("../Content/Images/speech_bubble.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        padding-top: 80px;
+        padding-left: 90px;
+        padding-right: 130px;
+        text-align: center;
+    }
+
+    #speech_bubble_text {
+        height: 130px;
+        overflow: auto;
+    }
+</style>
+
+<div id="container">
+    <div>
+        <div id="img_container"></div>
+        <div id="speech_bubble">
+            <div id="speech_bubble_text">
+            </div>
+            <button onclick="changeTextPrevious()" class="btn" style="border: none; background: none" id="back_button" width="70px"><img src="../Content/Images/arrow.png" width="50px" style="transform: scaleX(-1);"></button>
+            <button onclick="changeTextNext()" class="btn" style="border:none;background:none" id="forward_button" width="70px"><img src="../Content/Images/arrow.png" width="50px"></button>
+        </div>
     </div>
 </div>
+<script>
+    var counter = 0;
+    document.getElementById("back_button").disabled = true;
+    const text = ["<h4>Καλως ήρθες στον ιστότοπο μας!<br><br> Εδώ μπορείς να παίξεις παιχνίδια και να δοκιμάσεις τις γνώσεις σου!</h4>", "<h4>Για να παίξεις τα παιχνίδια μας και να κερδίσεις ποντους πρέπει να έχεις λογαριασμό!<br></h4>", "<h4>Συνδέσου εδώ<br></h4>"];
+    document.getElementById("speech_bubble_text").innerHTML = text[0];
+    document.getElementById("forward_button").classList.add("zoom");
+    document.getElementById("back_button").classList.add("disabled");
+    function changeTextNext() {
+        if (counter < text.length - 1) {
+            counter++;
+            document.getElementById("speech_bubble_text").innerHTML = text[counter];
+            document.getElementById("back_button").disabled = false;
+            document.getElementById("back_button").classList.remove("disabled");
+
+            document.getElementById("back_button").classList.add("zoom");
+            if (counter == text.length - 1) {
+                document.getElementById("forward_button").disabled = true;
+                document.getElementById("forward_button").classList.add("disabled");
+
+                document.getElementById("speech_bubble_text").innerHTML += "<button class='btn btn-primary' onclick=\"location.href='/Authorization';\">Συνδέσου τώρα!</button";
+                document.getElementById("forward_button").classList.remove("zoom");
+            }
+        }
+
+
+    }
+    function changeTextPrevious() {
+        if (counter > 0) {
+            counter--;
+            document.getElementById("speech_bubble_text").innerHTML = text[counter];
+            document.getElementById("forward_button").classList.add("zoom");
+            document.getElementById("forward_button").disabled = false;
+            document.getElementById("forward_button").classList.remove("disabled");
+
+            if (counter == 0) {
+                document.getElementById("back_button").disabled = true;
+                document.getElementById("back_button").classList.add("disabled");
+                document.getElementById("back_button").classList.remove("zoom");
+            }
+        }
+    }
+</script>

@@ -177,6 +177,14 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\arrow.png" />
+    <Content Include="Content\Images\class_background.jpg" />
+    <Content Include="Content\Images\magnifing_glass.png" />
+    <Content Include="Content\Images\Multiplication_Addition_Example.png" />
+    <Content Include="Content\Images\Multiplication_Apples_1_Example.png" />
+    <Content Include="Content\Images\Multiplication_Apples_2_Example.png" />
+    <Content Include="Content\Images\owl_image.png" />
+    <Content Include="Content\Images\speech_bubble.png" />
     <Content Include="Content\Images\background.jpg" />
     <Content Include="Content\Images\Multiplication_Addition_Example.png" />
     <Content Include="Content\Images\Multiplication_Apples_1_Example.png" />
@@ -240,6 +248,7 @@
     <Content Include="Views\Home\Theory.cshtml" />
     <Content Include="Views\Shared\QuestionTable.cshtml" />
     <Content Include="Views\Shared\StudentViews.cshtml" />
+    <Content Include="Views\Shared\Hint.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
