@@ -1,0 +1,58 @@
+﻿
+@Html.Partial("../Shared/StudentViews")
+
+@model Test
+
+<style>
+    .btn-container {
+        text-align: center;
+    }
+
+    .btn {
+        font-size: min(max(1.3vmax, 16px), 48px);
+        margin: 10px;
+        padding: 0.3em 1em 0.3em 1em;
+        max-width: 100%; /* Overide preset value */
+    }
+</style>
+
+@if (Session["is_teacher"] == null)
+{
+    <br />
+    <div>
+        Δεν είσαι συνδεδεμένος, συνδέσου για να αποθηκευτούν τα αποτελέσματά σου.
+    </div>
+    <br />
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <table class="table">
+        @for (int i = 0; i < Model.questions.Count; i++)
+        {
+            <tr>
+                <td class="col-xs-5" style="text-align: right;">
+                    @Html.DisplayFor(m => m.questions[i].question)
+                </td>
+                <td class="col-xs-7" style="text-align: left;">
+                    @Html.TextBoxFor(m => m.questions[i].given_answer, new { required = true, type = "number" })
+                </td>
+            </tr>
+        }
+    </table>
+
+    if (ViewBag.error != null)
+    {
+        <div class="text-danger">
+            @ViewBag.error
+        </div>
+    }
+
+    <div class="form-group">
+        <div class="btn-container">
+            <input type="submit" value="Αποστολή Απαντήσεων" class="btn btn-primary" />
+        </div>
+    </div>
+}

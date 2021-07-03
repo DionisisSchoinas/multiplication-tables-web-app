@@ -154,19 +154,23 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SchoolEntityModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Singleton\StudentData.cs" />
     <Compile Include="Models\Student.cs">
       <DependentUpon>SchoolEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Teacher.cs">
       <DependentUpon>SchoolEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TestName.cs">
+      <DependentUpon>SchoolEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>SchoolEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Singleton\Question.cs" />
-    <Compile Include="Singleton\ListEditor.cs" />
-    <Compile Include="Singleton\Test.cs" />
+    <Compile Include="Models\Singleton\Question.cs" />
+    <Compile Include="Models\Singleton\ListEditor.cs" />
+    <Compile Include="Models\Singleton\Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -176,12 +180,16 @@
     <Content Include="Content\Images\arrow.png" />
     <Content Include="Content\Images\class_background.jpg" />
     <Content Include="Content\Images\magnifing_glass.png" />
-    <Content Include="Content\Images\math-pattern.jpg" />
     <Content Include="Content\Images\Multiplication_Addition_Example.png" />
     <Content Include="Content\Images\Multiplication_Apples_1_Example.png" />
     <Content Include="Content\Images\Multiplication_Apples_2_Example.png" />
     <Content Include="Content\Images\owl_image.png" />
     <Content Include="Content\Images\speech_bubble.png" />
+    <Content Include="Content\Images\background.jpg" />
+    <Content Include="Content\Images\Multiplication_Addition_Example.png" />
+    <Content Include="Content\Images\Multiplication_Apples_1_Example.png" />
+    <Content Include="Content\Images\Multiplication_Apples_2_Example.png" />
+    <Content Include="Content\Images\whiteboard.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -235,12 +243,13 @@
     <Content Include="Views\Authorization\Index.cshtml" />
     <Content Include="Views\Authorization\Student.cshtml" />
     <Content Include="Views\Authorization\Teacher.cshtml" />
-    <Content Include="Views\Teacher\Index.cshtml" />
+    <Content Include="Views\Teacher\Students.cshtml" />
     <Content Include="Views\Teacher\StudentDetails.cshtml" />
     <Content Include="Views\Home\Theory.cshtml" />
+    <Content Include="Views\Shared\QuestionTable.cshtml" />
+    <Content Include="Views\Shared\StudentViews.cshtml" />
     <Content Include="Views\Shared\Hint.cshtml" />
-    <Content Include="Views\Game\MultiplicationGame1.cshtml" />
-    <Content Include="Views\Home\GameTest.cshtml" />
+    <Content Include="Views\Shared\CircularProgressBarCSS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

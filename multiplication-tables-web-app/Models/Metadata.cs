@@ -8,10 +8,26 @@ namespace multiplication_tables_web_app.Models
 {
     public class StudentMetadata
     {
+        [Key]
+        [Display(Name = "Student Id")]
+        [Required]
+        public string StudentID;
+        
+        [Display(Name = "User Id")]
+        [Required]
+        public string UserID;
     }
 
     public class TeacherMetadata
     {
+        [Key]
+        [Display(Name = "Teacher Id")]
+        [Required]
+        public string TeacherID;
+
+        [Display(Name = "User Id")]
+        [Required]
+        public string UserID;
     }
 
     public class UserMetadata
@@ -28,12 +44,24 @@ namespace multiplication_tables_web_app.Models
 
         [Display(Name = "Κωδικός Χρήστη")]
         [Required]
+        [DataType(System.ComponentModel.DataAnnotations.DataType.Password)]
         [MaxLength(20, ErrorMessage = "Κωδικός χρήστη έως 20 χαρακτήρες")]
         public string Password;
 
         [Display(Name = "Ονοματεπώνυμο")]
         [Required]
         [MaxLength(80, ErrorMessage = "Ονοματεπώνυμο έως 80 χαρακτήρες")]
+        public string Name;
+    }
+    public class TestNameMetadata
+    {
+        [Key]
+        [Display(Name = "Test Id")]
+        [Required]
+        public string TestID;
+
+        [Display(Name = "Όνομα Τέστ")]
+        [Required]
         public string Name;
     }
 }

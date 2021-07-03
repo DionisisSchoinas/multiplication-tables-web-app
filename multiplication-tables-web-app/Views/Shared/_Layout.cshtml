@@ -6,153 +6,80 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-</head>
-<body>
     <style>
-
-        #container {
-            width: 1000px;
-            margin: 0 auto;
-            margin-top: 50px;
-        }
-
-        #img_container {
-            float: right;
-            width: 50%;
-            margin-top: 100px;
-            height: 500px;
-            background-image: url("../Content/Images/owl_image.png");
-            background-repeat: no-repeat;
-            background-size: contain;
-        }
-
-        #speech_bubble {
-            float: left;
-            width: 50%;
-            height: 500px;
-            background-image: url("../Content/Images/speech_bubble.png");
-            background-repeat: no-repeat;
-            background-size: contain;
-            padding-top: 80px;
-            padding-left: 90px;
-            padding-right: 130px;
-            text-align: center;
-        }
-
-        #speech_bubble_text {
-            height: 130px;
-            overflow: auto;
-        }
-
-        .zoom {
-            background: none;
-            border: none;
-            transition: transform .2s; /* Animation */
-        }
-
-            .zoom:hover {
-                background: none;
-                transform: scale(1.5);
-            }
-
-        .slider {
-            overflow-y: hidden;
-            max-height: 200px; /* approximate max height */
-
-            transition-property: all;
-            transition-duration: .5s;
-            transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
-        }
-
-            .slider.closed {
-                max-height: 0;
-            }
-
-        .hint {
-            position: absolute;
-            right: 20px;
-            bottom: 20px;
-        }
-
-        .hint-content {
-            position: relative;
-            border-radius: 20px;
-            height: 200px;
-            width: 250px;
-        }
-
-        .disabled {
-            cursor: not-allowed;
-        }
-
-        #hint_button {
-            position: absolute;
-            right: 20px;
-            bottom: 20px;
-        }
-
-        @@-webkit-keyframes bounce {
-            0% {
-                transform: scale(1,1) translate(0px, 0px);
-            }
-
-            30% {
-                transform: scale(1,0.8) translate(0px, 10px);
-            }
-
-            75% {
-                transform: scale(1,1.1) translate(0px, -25px);
-            }
-
-            100% {
-                transform: scale(1,1) translate(0px, 0px);
-            }
-        }
-
-        .bounce {
-            margin: 0 auto;
-            height: 20px;
-            width: 150px;
-            padding: 20px;
-            -webkit-animation: bounce 1s infinite;
+        .login-display {
+            font-weight: 800;
+            margin: 5px;
         }
     </style>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("We Study", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Theory", "Theory", "Home")</li>
-                    <li>@Html.ActionLink("Simple Test", "PickTest", "SimpleTest")</li>
-                    <li>@Html.ActionLink("Final Test", "Questions", "FinalTest")</li>
-                    <li>@Html.ActionLink("Teacher View", "Index", "Teacher")</li>
+                    <li>@Html.ActionLink("Κεντρική Σελίδα", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Θεωρία", "Theory", "Home")</li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Παιχνίδια Εκμάθησης <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                @Html.ActionLink("Κάρτες (change link)", "PickTest", "SimpleTest", null, new { @class = "dropdown-item" })
+                            </li>
+                            <li>
+                                @Html.ActionLink("Σύννεφα (change link)", "Questions", "FinalTest", null, new { @class = "dropdown-item" })
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Κάνε Τεστ <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                @Html.ActionLink("Απλά Τεστ", "PickTest", "SimpleTest", null, new { @class = "dropdown-item" })
+                            </li>
+                            <li>
+                                @Html.ActionLink("Τελικό Τεστ", "Questions", "FinalTest", null, new { @class = "dropdown-item" })
+                            </li>
+                        </ul>
+                    </li>
                     @if (Session["is_teacher"] != null)
                     {
-                        <li>@Html.ActionLink("Logout", "Logout", "Authorization")</li>
-                        <li>Logged in as : @Session["name"]</li>
+                        <li>@Html.ActionLink("Δάσκαλος", "Students", "Teacher")</li>
+                    }
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (Session["is_teacher"] != null)
+                    {
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                                Συνδεδεμένος ως : <span class="login-display">@Session["name"] <span class="caret"></span></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Αποσύνδεση", "Logout", "Authorization")</li>
+                            </ul>
+                        </li>
                     }
                     else
                     {
-                        <li>@Html.ActionLink("Login/Register", "Index", "Authorization")</li>
+                        <li>@Html.ActionLink("Σύνδεση/Εγγραφή", "Index", "Authorization")</li>
                     }
                 </ul>
             </div>
         </div>
+    </nav>
+    <div id="body_container" class="container body-content">
+        <div style="overflow: auto; height: 80vh; margin: 45px 30px 30px 35px;">
+            @RenderBody()
+        </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-
-    </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

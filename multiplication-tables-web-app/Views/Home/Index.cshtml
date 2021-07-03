@@ -2,6 +2,44 @@
     ViewBag.Title = "Home Page";
 }
 
+@Html.Partial("../Shared/StudentViews")
+
+<style>
+    #container {
+        width: 1000px;
+        margin: 0 auto;
+        margin-top: 50px;
+    }
+
+    #img_container {
+        float: right;
+        width: 50%;
+        margin-top: 100px;
+        height: 500px;
+        background-image: url("../Content/Images/owl_image.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+
+    #speech_bubble {
+        float: left;
+        width: 50%;
+        height: 500px;
+        background-image: url("../Content/Images/speech_bubble.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        padding-top: 80px;
+        padding-left: 90px;
+        padding-right: 130px;
+        text-align: center;
+    }
+
+    #speech_bubble_text {
+        height: 130px;
+        overflow: auto;
+    }
+</style>
+
 <div id="container">
     <div>
         <div id="img_container"></div>
@@ -9,15 +47,12 @@
             <div id="speech_bubble_text">
             </div>
             <button onclick="changeTextPrevious()" class="btn" style="border: none; background: none" id="back_button" width="70px"><img src="../Content/Images/arrow.png" width="50px" style="transform: scaleX(-1);"></button>
-            <button onclick="changeTextNext()"  class="btn" style="border:none;background:none" id="forward_button" width="70px"><img src="../Content/Images/arrow.png" width="50px"></button>
+            <button onclick="changeTextNext()" class="btn" style="border:none;background:none" id="forward_button" width="70px"><img src="../Content/Images/arrow.png" width="50px"></button>
         </div>
     </div>
-    
 </div>
 <script>
-
     var counter = 0;
-    var toggled = false;
     document.getElementById("back_button").disabled = true;
     const text = ["<h4>Καλως ήρθες στον ιστότοπο μας!<br><br> Εδώ μπορείς να παίξεις παιχνίδια και να δοκιμάσεις τις γνώσεις σου!</h4>", "<h4>Για να παίξεις τα παιχνίδια μας και να κερδίσεις ποντους πρέπει να έχεις λογαριασμό!<br></h4>", "<h4>Συνδέσου εδώ<br></h4>"];
     document.getElementById("speech_bubble_text").innerHTML = text[0];
@@ -35,7 +70,7 @@
                 document.getElementById("forward_button").disabled = true;
                 document.getElementById("forward_button").classList.add("disabled");
 
-                document.getElementById("speech_bubble_text").innerHTML += "<button class='btn btn-primary'>Συνδέσου τώρα!</button";
+                document.getElementById("speech_bubble_text").innerHTML += "<button class='btn btn-primary' onclick=\"location.href='/Authorization';\">Συνδέσου τώρα!</button";
                 document.getElementById("forward_button").classList.remove("zoom");
             }
         }
@@ -55,20 +90,6 @@
                 document.getElementById("back_button").classList.add("disabled");
                 document.getElementById("back_button").classList.remove("zoom");
             }
-        }
-    }
-    function toggle() {
-        if (toggled) {
-            document.getElementById("slider").classList.remove("closed");
-            document.getElementById("hint_button").style.visibility = 'hidden';
-            toggled = false;
-        }
-        else {
-            document.getElementById("slider").classList.add("closed");
-            setTimeout(function () { document.getElementById("hint_button").style.visibility = 'visible';}, 450);
-               
-            toggled = true;
-
         }
     }
 </script>
