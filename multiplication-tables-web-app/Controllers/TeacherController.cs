@@ -85,7 +85,7 @@ namespace multiplication_tables_web_app.Controllers
         }
 
         // GET: Teacher/StudentDetails/1
-        public ActionResult StudentDetails(int? id)
+        public ActionResult StudentDetails(int id)
         {
             if (NotTeacher())
                 return RedirectToAction("Index", "Authorization");
