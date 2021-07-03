@@ -87,11 +87,9 @@ namespace multiplication_tables_web_app.Controllers
         // GET: Teacher/StudentDetails/1
         public ActionResult StudentDetails(int? id)
         {
-            id = 1;
-            /*
             if (NotTeacher())
                 return RedirectToAction("Index", "Authorization");
-            */
+
             var student = db.Students.Find(id);
             if (student == null)
                 return RedirectToAction("Students");

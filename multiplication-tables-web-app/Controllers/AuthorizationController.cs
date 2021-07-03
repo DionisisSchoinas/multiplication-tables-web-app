@@ -14,6 +14,7 @@ namespace multiplication_tables_web_app.Controllers
         // GET: Authorization
         public ActionResult Index()
         {
+            ViewBag.hint = "Συμπλήρωσε τα στοιχεία σου";
             return View();
         }
 
@@ -49,7 +50,7 @@ namespace multiplication_tables_web_app.Controllers
             }
             else
             {
-                ViewBag.error = "Λανθασμένο όονμα χρήστη ή/και κωδικός πρόσβασης";
+                ViewBag.error = "Λανθασμένο όνομα χρήστη ή/και κωδικός πρόσβασης";
                 return View();
             }
         }
