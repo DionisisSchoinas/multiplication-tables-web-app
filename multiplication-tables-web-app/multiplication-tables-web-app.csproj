@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthorizationController.cs" />
     <Compile Include="Controllers\FinalTestController.cs" />
+    <Compile Include="Controllers\GamesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ResultsController.cs" />
     <Compile Include="Controllers\SimpleTestController.cs" />
@@ -179,6 +180,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\arrow.png" />
     <Content Include="Content\Images\class_background.jpg" />
+    <Content Include="Content\Images\cloud.jpg" />
     <Content Include="Content\Images\magnifing_glass.png" />
     <Content Include="Content\Images\Multiplication_Addition_Example.png" />
     <Content Include="Content\Images\Multiplication_Apples_1_Example.png" />
@@ -250,6 +252,8 @@
     <Content Include="Views\Shared\StudentViews.cshtml" />
     <Content Include="Views\Shared\Hint.cshtml" />
     <Content Include="Views\Shared\CircularProgressBarCSS.cshtml" />
+    <Content Include="Views\Games\Index.cshtml" />
+    <Content Include="Views\Games\CloudGame.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
