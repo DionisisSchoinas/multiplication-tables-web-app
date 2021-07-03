@@ -31,6 +31,7 @@ namespace multiplication_tables_web_app.Controllers
                 SaveMistakes(correct_results, correct_results_total, testAnswers);
                 ViewBag.correct_results = correct_results;
                 ViewBag.correct_results_total = correct_results_total;
+                ViewBag.hint = "Εδώ βλέπεις τα αποτελέσματά σου";
                 return View(testAnswers);
             }
             catch

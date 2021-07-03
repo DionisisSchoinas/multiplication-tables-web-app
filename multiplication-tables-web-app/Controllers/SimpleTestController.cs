@@ -17,6 +17,7 @@ namespace multiplication_tables_web_app.Controllers
             var testNames = db.TestNames.ToList();
             testNames.RemoveAt(testNames.Count() - 1);
             ViewBag.testNames = testNames;
+            ViewBag.hint = "Διάλεξε ποια προπαίδεια θέλεις";
             return View();
         }
 
@@ -45,6 +46,7 @@ namespace multiplication_tables_web_app.Controllers
             test.questions = questions;
             TempData["testId"] = id.ToString();
             TempData["testQuestions"] = test;
+            ViewBag.hint = "Βάλε την απάντηση κάθε ερώτησης στο αντίστοιχο κουτάκι";
             return View(test);
         }
 

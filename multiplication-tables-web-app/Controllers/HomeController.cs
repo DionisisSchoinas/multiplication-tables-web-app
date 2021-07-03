@@ -13,6 +13,7 @@ namespace multiplication_tables_web_app.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.hint = "Πήγαινε στην θεωρία για να μελετήσεις";
             return View();
         }
 
@@ -21,6 +22,7 @@ namespace multiplication_tables_web_app.Controllers
             var testNames = db.TestNames.ToList();
             testNames.RemoveAt(testNames.Count()-1);
             ViewBag.testNames = testNames;
+            ViewBag.hint = "Αφού μελετήσεις παίξε τα παιχνίδια εκμάθησης";
             return View();
         }
     }

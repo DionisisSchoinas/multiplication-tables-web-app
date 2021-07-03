@@ -30,6 +30,7 @@ namespace multiplication_tables_web_app.Controllers
             test.test_id = 10;  // 10 tables each has an id from 0 to 9, so finaltest gets 10
             test.questions = questions;
             TempData["testQuestions"] = test;
+            ViewBag.hint = "Βάλε την απάντηση κάθε ερώτησης στο αντίστοιχο κουτάκι";
             return View(test);
         }
 
