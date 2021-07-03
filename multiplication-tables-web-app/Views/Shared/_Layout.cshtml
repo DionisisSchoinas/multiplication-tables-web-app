@@ -11,7 +11,7 @@
             font-weight: 800;
             margin: 5px;
         }
-    </style>
+      </style>
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -32,10 +32,10 @@
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Παιχνίδια Εκμάθησης <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li>
-                                @Html.ActionLink("Κάρτες (change link)", "PickTest", "SimpleTest", null, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Κάρτες", "CardGame", "Games", null, new { @class = "dropdown-item" })
                             </li>
                             <li>
-                                @Html.ActionLink("Σύννεφα (change link)", "Questions", "FinalTest", null, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Σύννεφα", "CloudGame", "Games", null, new { @class = "dropdown-item" })
                             </li>
                         </ul>
                     </li>
