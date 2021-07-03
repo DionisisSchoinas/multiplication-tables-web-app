@@ -5,59 +5,65 @@
 
 @Html.Partial("../Shared/StudentViews")
 
+@{ 
+    int cloudSpeed = 10;
+} 
+
+
 <style>
     .cloud {
-        font-size: 40px;
+        font-size: 25px;
+        font-weight: 600;
         background-image: url('../Content/Images/cloud.jpg');
-        width: 200px;
-        height: 150px;
+        width: 160px;
+        height: 120px;
         background-repeat: no-repeat;
         background-size: contain;
         padding-top: 40px;
         padding-left: 55px;
-        position: absolute;
+        position: relative;
     }
 
     .moving {
         animation-name: move;
-        animation-duration: 20s;
+        animation-duration: @(Html.Raw(cloudSpeed))s;
     }
-    /* cloud Animations */
 
+    /* cloud Animations */
     @@keyframes move {
         0% {
-            left: 0px;
+            margin-left: -5%;
             visibility: hidden;
             opacity: 0;
         }
 
         20% {
-            left: 150px;
-            transform: rotateZ(20deg);
+            margin-left: 10%;
+            transform: rotateZ(10deg);
             opacity: 1;
         }
 
         40% {
-            left: 350px;
-            transform: rotateZ(-20deg);
+            margin-left: 30%;
+            transform: rotateZ(-10deg);
         }
 
         60% {
-            left: 550px;
-            transform: rotateZ(20deg);
+            margin-left: 50%;
+            transform: rotateZ(10deg);
         }
 
         80% {
-            left: 750px;
-            transform: rotateZ(-20deg);
+            margin-left: 70%;
             visibility: visible;
+            transform: rotateZ(-10deg);
             opacity: 1;
         }
 
         100% {
+            margin-left: 95%;
             visibility: hidden;
             opacity: 0;
-            left: 900px;
             display: none;
         }
     }
@@ -66,10 +72,11 @@
         width: 200px;
     }
 
-        .input-could-game input {
-            width: 200px;
-            font-size: 40px;
-        }
+    .input-could-game input {
+        width: 200px;
+        font-size: 40px;
+    }
+
     /* Modal Classes */
     /* The Modal (background) */
     .modal {
@@ -104,38 +111,55 @@
         font-weight: bold;
     }
 
-        .close:hover,
-        .close:focus {
-            color: #000;
-            text-decoration: none;
-            cursor: pointer;
-        }
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
 </style>
-<div style="width:100%;height:85%">
-    <div style="font-size:20px">
-        Ζωή : <span id="life">5</span><br />
-        Πόντοι : <span id="pointsText">5</span>
 
+<div style="width:100%; height:85%; overflow: hidden;">
+    <div style="font-size:20px">
+        Ζωές : <span id="lifeText">0</span><br />
+        Πόντοι : <span id="pointsText">0</span>
     </div>
-    <div class="cloud" id="cloud_1">
-        5x10
-    </div>
-    <div class="cloud" id="cloud_2">
-        5x9
-    </div>
-    <div class="cloud" id="cloud_3">
-        7x4
+    <div style="padding-top: 30px;">
+        <table style= "table-layout:fixed; width:100%; height:100%;">
+            <tr>
+                <td style="height: 160px;">
+                    <div class="cloud" id="cloud_1">
+                        5x10
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="height: 160px;">
+                    <div class="cloud" id="cloud_2">
+                        5x9
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="height: 160px;">
+                    <div class="cloud" id="cloud_3">
+                        7x4
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
 </div>
+
 <div class="input-could-game" style="float:left;">
     <input id="input-box" type="text" pattern="\d*" maxlength="3">
 </div>
-<div id="hint">
+<div id="hint-view">
     <img src="~/Content/Images/arrow.png" style="transform:rotate(180deg);float:left;margin-left:20px;margin-right:20px" width="50">
-    <h3>Συμπλήρωσε τις απαντίσεις εδώ και πάτα ENTER</h3>
+    <h3>Συμπλήρωσε τις απαντήσεις εδώ και πάτα ENTER</h3>
 </div>
-<div id="myModal" class="modal">
 
+<div id="myModal" class="modal">
     <!-- Modal content -->
     <div class="modal-content">
         <div style="margin:auto;width: 60rem; height: 35rem; position: relative;">
@@ -146,7 +170,8 @@
         </div>
         <div style="text-align:center">
             <button class="btn btn-success" id="play-again-button" onclick="location.reload();">Παίξε ξανά!</button>
-            <button class="btn btn-primary" id="tests-button" onclick="window.location.href = '../SimpleTest/PickTest'">Προχώρησε στα τεστ!</button>
+            <button class="btn btn-info" id="tests-button" onclick="window.location.href = '../SimpleTest/PickTest'">Προχώρησε στα τεστ!</button>
+            <button class="btn btn-primary" id="home-button" onclick="location.href = '/'">Πίσω στην Κεντρική!</button>
             <button class="btn btn-primary" id="start-game-button" onclick="startGame();">Παίξε</button>
         </div>
     </div>
@@ -158,10 +183,11 @@
     var cloud1 = document.getElementById("cloud_1");
     var cloud2 = document.getElementById("cloud_2");
     var cloud3 = document.getElementById("cloud_3");
-    var lifeText = document.getElementById("life");
+    var lifeText = document.getElementById("lifeText");
     var pointsText = document.getElementById("pointsText");
-    var lifePoints = 1;
+    var lifePoints = 5;
     var points = 0;
+    var cloudSpawnRate = @Html.Raw(cloudSpeed);
     lifeText.innerHTML = lifePoints;
     pointsText.innerHTML = points;
 
@@ -173,14 +199,10 @@
             // Cancel the default action, if needed
             event.preventDefault();
             checkClouds(inputBox.value);
-            document.getElementById("hint").style.display = "none";
+            document.getElementById("hint-view").style.display = "none";
         }
     });
-
-    cloud1.style.marginTop = "10px";
-    cloud2.style.marginTop = "150px";
-    cloud3.style.marginTop = "300px";
-
+    
     cloud1.style.display = "none";
     cloud2.style.display = "none";
     cloud3.style.display = "none";
@@ -188,26 +210,25 @@
     var gameOverVar = false;
 
     function tick(currentTime) {
-        if (currentTime % 25 == 0) {
+        if (gameOverVar)
+            return;
+
+        if (currentTime % cloudSpawnRate == 0) {
             move(cloud3);
         }
-        else if ((currentTime + 10) % 25 == 0) {
+        else if ((currentTime + 4) % cloudSpawnRate == 0) {
             move(cloud2);
-
-
         }
-        else if ((currentTime + 20) % 25 == 0) {
+        else if ((currentTime + 8) % cloudSpawnRate == 0) {
             move(cloud1);
-
-
         }
-        if (!gameOverVar) {
-            setTimeout(function () {
-                currentTime += 1;
-                tick(currentTime);
-            }, 1000);
-        }
+
+        setTimeout(function () {
+            currentTime += 1;
+            tick(currentTime);
+        }, 1000);
     }
+
     function move(cloud) {
         var numberOneInt = getRandomInt(10) + 1;
         var numberTwoInt = getRandomInt(10) + 1;
@@ -216,43 +237,50 @@
         cloud.style.display = "block";
         cloud.setAttribute("value", numberOneInt * numberTwoInt);
         setTimeout(function () {
-            if (cloud.style.display != "none") {
-                lifePoints--;
-                lifeText.innerHTML = lifePoints;
-                if (lifePoints <= 0) {
-                    gameOver();
-                }
-            }
-
-            cloud.style.display = "none";
-            cloud.classList.remove("moving");
-            cloud.setAttribute("value", -1);
-        }, 20000);
+            hide(cloud);
+        }, (cloudSpawnRate-1)*1000 );
     }
+
+    function hide(cloud) {
+        if (cloud.style.display != "none") {
+            lifePoints--;
+            lifeText.innerHTML = lifePoints;
+            if (lifePoints <= 0) {
+                gameOver();
+            }
+        }
+        cloud.style.display = "none";
+        cloud.classList.remove("moving");
+        cloud.setAttribute("value", -1);
+    }
+
     function gameOver() {
         cloud1.style.display = "none";
-        cloud1.classList.remove("moving");
         cloud2.style.display = "none";
         cloud3.style.display = "none";
         gameOverVar = true;
-
 
         modalText.innerHTML = "Οι πόντοι ζώης σου έφτασαν το 0! Το σκορ σου είναι <span id='score-final'></span>. Μπορείς να δοκιμάσεις ξανά ή να προχορήσεις στα τεστ!";
         document.getElementById("score-final").innerHTML = points;
         buttonPlayAgain.style.display = "inline";
         buttonTests.style.display = "inline";
+        buttonHome.style.display = "inline";
         buttonStartGame.style.display = "none";
         modal.style.display = "block";
-        inputNumber.disabled = true;
+        inputBox.disabled = true;
     }
+
     function startGame() {
         tick(0);
         modal.style.display = "none";
-
+        lifeText.innerHTML = lifePoints;
+        pointsText.innerHTML = points;
     }
+
     function getRandomInt(max) {
         return Math.floor(Math.random() * max);
     }
+
     function checkClouds(value) {
         if (value == cloud1.getAttribute("value")) {
             cloud1.style.display = "none";
@@ -286,13 +314,14 @@
     //modal button
     var buttonPlayAgain = document.getElementById("play-again-button");
     var buttonTests = document.getElementById("tests-button");
+    var buttonHome = document.getElementById("home-button");
     var buttonStartGame = document.getElementById("start-game-button");
 
     buttonPlayAgain.style.display = "none";
     buttonTests.style.display = "none";
+    buttonHome.style.display = "none";
     buttonStartGame.style.display = "inline";
 
     modal.style.display = "block";
     modalText.innerHTML = "Καλώς ήρθες στο διαδραστικό παιχνίδι μέ τα συννεφάκια. Εξαφάνησε τα συνεφάκια λύνωντας της πράξης μέσα τους και μην τα αφήσεις να ακουμπίσουν το τέλος του πίνακα";
-
 </script>
