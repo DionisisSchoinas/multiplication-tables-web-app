@@ -180,6 +180,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\arrow.png" />
     <Content Include="Content\Images\class_background.jpg" />
+    <Content Include="Content\Images\clipboard.png" />
     <Content Include="Content\Images\cloud.jpg" />
     <Content Include="Content\Images\math-pattern.jpg" />
     <Content Include="Content\Images\magnifing_glass.png" />
