@@ -11,12 +11,14 @@ namespace multiplication_tables_web_app.Controllers
     {
         private SchoolDBEntities db = new SchoolDBEntities();
 
+        // GET: Index
         public ActionResult Index()
         {
             ViewBag.hint = "Πήγαινε στην θεωρία για να μελετήσεις";
             return View();
         }
 
+        // GET: Theory
         public ActionResult Theory()
         {
             var testNames = db.TestNames.ToList();

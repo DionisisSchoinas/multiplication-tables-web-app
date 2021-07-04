@@ -55,7 +55,7 @@ namespace multiplication_tables_web_app.Controllers
             }
         }
 
-        // GET: Authorization
+        // GET: Authorization/Logout
         public ActionResult Logout()
         {
             Session.Remove("is_teacher");

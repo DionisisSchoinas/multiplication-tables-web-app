@@ -19,8 +19,6 @@ namespace multiplication_tables_web_app.Controllers
             if (NotTeacher())
                 return RedirectToAction("Index", "Authorization");
 
-            //var new_students = db.Users.Join(db.Students, users => users.UserID, students => students.UserID, (users, students) => new { StudentID = students.StudentID, Name = users.Name, Grades = students.Grades });
-            //ViewBag.students = new SelectList(new_students, "StudentID", "Name");
             var students = db.Students.ToList();
 
             var studentsData = new StudentData[students.Count()];
@@ -84,7 +82,7 @@ namespace multiplication_tables_web_app.Controllers
             return View();
         }
 
-        // GET: Teacher/StudentDetails/1
+        // GET: Teacher/StudentDetails/:id
         public ActionResult StudentDetails(int id)
         {
             if (NotTeacher())
