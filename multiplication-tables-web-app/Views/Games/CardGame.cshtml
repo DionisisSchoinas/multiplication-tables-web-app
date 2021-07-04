@@ -13,7 +13,7 @@
     /* Card Classes */
     .card-text {
         text-align: right;
-        font-size: 10rem;
+        font-size: 8rem;
         line-height: 10rem;
     }
 
@@ -170,12 +170,12 @@
         font-weight: bold;
     }
 
-        .close:hover,
-        .close:focus {
-            color: #000;
-            text-decoration: none;
-            cursor: pointer;
-        }
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
 </style>
 
 <div class="card-body">
@@ -315,32 +315,35 @@
             console.log("correct");
             wrongCheck.style.display = "none";
             rightCheck.style.display = "block";
-            setTimeout(function () {
-                numberOneInt = getRandomInt(10) + 1;
-                numberTwoInt = getRandomInt(10) + 1;
-                numberOneAlt.innerHTML = numberOneInt;
-                numberTwoAlt.innerHTML = numberTwoInt;
-                card.classList.add("flip");
-                button.disabled = true;
-                setTimeout(function () {
-                    inputNumber.value = "";
-                    numberOne.innerHTML = numberOneInt;
-                    numberTwo.innerHTML = numberTwoInt;
-                    card.classList.remove("flip");
-                    openCard.style.display = "block";
-                    button.disabled = false;
-                    wrongCheck.style.display = "none";
-                    rightCheck.style.display = "none";
-                }, 1000);
-            }, 500);
-
+            flipAnimation();
         }
         else {
             console.log("false");
             wrongCheck.style.display = "block";
             rightCheck.style.display = "none";
+            flipAnimation();
         }
+    }
 
+    function flipAnimation() {
+        setTimeout(function () {
+            numberOneInt = getRandomInt(10) + 1;
+            numberTwoInt = getRandomInt(10) + 1;
+            numberOneAlt.innerHTML = numberOneInt;
+            numberTwoAlt.innerHTML = numberTwoInt;
+            card.classList.add("flip");
+            button.disabled = true;
+            setTimeout(function () {
+                inputNumber.value = "";
+                numberOne.innerHTML = numberOneInt;
+                numberTwo.innerHTML = numberTwoInt;
+                card.classList.remove("flip");
+                openCard.style.display = "block";
+                button.disabled = false;
+                wrongCheck.style.display = "none";
+                rightCheck.style.display = "none";
+            }, 1000);
+        }, 500);
     }
 
     function startGame() {

@@ -6,7 +6,7 @@
 @Html.Partial("../Shared/StudentViews")
 
 @{ 
-    int cloudSpeed = 10;
+    int cloudSpeed = 20;
 } 
 
 
@@ -121,8 +121,16 @@
 
 <div style="width:100%; height:85%; overflow: hidden;">
     <div style="font-size:20px">
-        Ζωές : <span id="lifeText">0</span><br />
-        Πόντοι : <span id="pointsText">0</span>
+        <div style="float: left;">
+            Ζωές : <span id="lifeText">0</span>
+        </div>
+        <div style="float: right;">
+            Χρόνος :  <span id="timeText">0</span>
+        </div>
+        <br />
+        <div style="float: left;">
+            Πόντοι : <span id="pointsText">0</span>
+        </div>
     </div>
     <div style="padding-top: 30px;">
         <table style= "table-layout:fixed; width:100%; height:100%;">
@@ -185,6 +193,7 @@
     var cloud3 = document.getElementById("cloud_3");
     var lifeText = document.getElementById("lifeText");
     var pointsText = document.getElementById("pointsText");
+    var timeText = document.getElementById("timeText");
     var lifePoints = 5;
     var points = 0;
     var cloudSpawnRate = @Html.Raw(cloudSpeed);
@@ -212,6 +221,8 @@
     function tick(currentTime) {
         if (gameOverVar)
             return;
+
+        setTime(currentTime);
 
         if (currentTime % cloudSpawnRate == 0) {
             move(cloud3);
@@ -260,7 +271,7 @@
         cloud3.style.display = "none";
         gameOverVar = true;
 
-        modalText.innerHTML = "Οι πόντοι ζώης σου έφτασαν το 0! Το σκορ σου είναι <span id='score-final'></span>. Μπορείς να δοκιμάσεις ξανά ή να προχορήσεις στα τεστ!";
+        modalText.innerHTML = "Οι πόντοι ζώης σου έφτασαν το 0! Το σκορ σου είναι <span id='score-final'></span> σε " + timeText.innerHTML + ". Μπορείς να δοκιμάσεις ξανά ή να προχορήσεις στα τεστ!";
         document.getElementById("score-final").innerHTML = points;
         buttonPlayAgain.style.display = "inline";
         buttonTests.style.display = "inline";
@@ -298,6 +309,20 @@
             pointsText.innerHTML = points;
         }
         inputBox.value = "";
+    }
+
+    function setTime(currentTime) {
+        var sec = currentTime % 60;
+        var min = Math.floor(currentTime / 60);
+        sec = sec.toLocaleString('en-US', {
+            minimumIntegerDigits: 2,
+            useGrouping: false
+        });
+        min = min.toLocaleString('en-US', {
+            minimumIntegerDigits: 2,
+            useGrouping: false
+        })
+        timeText.innerHTML = min + ":" + sec;
     }
 
     var modalText = document.getElementById("modal-text");
