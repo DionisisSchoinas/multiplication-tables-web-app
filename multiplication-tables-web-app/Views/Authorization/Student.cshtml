@@ -11,15 +11,27 @@
         margin: 10px;
         padding: 0.3em 1em 0.3em 1em;
     }
+    .clipboard {
+        margin:auto;
+        padding-top: 7em;
+        padding-left:2em;
+        padding-right:2em;
+        width: 35em;
+        background-image: url('../Content/Images/clipboard.png');
+        height: 42em;
+        background-repeat: no-repeat;
+        background-size: 35em 42em;
+        font-family:'Comic Sans MS';
+    } 
+    
 </style>
 
-<h1>Εγγραφή Μαθητή</h1>
-<br />
+<div class="clipboard">
+    <h2 style="text-align:center;margin-bottom:1em;">Εγγραφή μαθητή</h2>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
-    <table class="table">
+    <table class="table ">
         <tr>
             <td>
                 @Html.LabelFor(m => m.Username)
@@ -68,3 +80,4 @@
         </div>
     </div>
 }
+</div>
