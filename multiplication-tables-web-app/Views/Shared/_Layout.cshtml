@@ -52,7 +52,10 @@
                     </li>
                     @if (Session["is_teacher"] != null)
                     {
-                        <li>@Html.ActionLink("Δάσκαλος", "Students", "Teacher")</li>
+                        if ((bool)Session["is_teacher"])
+                        {
+                            <li>@Html.ActionLink("Δάσκαλος", "Students", "Teacher")</li>
+                        }
                     }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
