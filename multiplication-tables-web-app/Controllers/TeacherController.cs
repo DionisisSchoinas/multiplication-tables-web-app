@@ -68,14 +68,14 @@ namespace multiplication_tables_web_app.Controllers
                 // Since the DB saves the mistakes the maxScore shows the test with the most mistakes
                 // so we put 1-maxScore as the worstScore
                 if (minTest == -1)
-                    studentsData[i].best_score = "Δεν έχουν γίνει τεστ";
-                else
-                    studentsData[i].best_score = db.TestNames.Find(minTest+1).Name + " : " + minScore + "%";
-
-                if (maxTest == -1)
                     studentsData[i].worst_score = "Δεν έχουν γίνει τεστ";
                 else
-                    studentsData[i].worst_score = db.TestNames.Find(maxTest + 1).Name + " : " + maxScore + "%";
+                    studentsData[i].worst_score = db.TestNames.Find(minTest+1).Name + " : " + minScore + "%";
+
+                if (maxTest == -1)
+                    studentsData[i].best_score = "Δεν έχουν γίνει τεστ";
+                else
+                    studentsData[i].best_score = db.TestNames.Find(maxTest + 1).Name + " : " + maxScore + "%";
             }
 
             ViewBag.students = studentsData;
